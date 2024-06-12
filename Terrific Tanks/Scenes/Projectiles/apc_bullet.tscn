@@ -1,0 +1,64 @@
+[gd_scene load_steps=8 format=3 uid="uid://bojef4l2w3at5"]
+
+[ext_resource type="Script" path="res://Scenes/Projectiles/apc_bullet.gd" id="1_4cmln"]
+[ext_resource type="Texture2D" uid="uid://ducoumbi3nen8" path="res://Assets/Projectiles/1x/Asset 27.png" id="1_vatti"]
+[ext_resource type="Texture2D" uid="uid://bw8ehlw7j2sva" path="res://Assets/effects/1x/Asset 22.png" id="3_as2sj"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pjd6c"]
+radius = 2.22222
+height = 15.5556
+
+[sub_resource type="Gradient" id="Gradient_2n5sd"]
+offsets = PackedFloat32Array(0, 0.553279, 0.594262, 0.995902)
+colors = PackedColorArray(0.86, 0.616333, 0, 1, 0.45, 0.45, 0.45, 1, 0.51, 0.51, 0.51, 1, 0.509804, 0.509804, 0.509804, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_k3cbv"]
+gradient = SubResource("Gradient_2n5sd")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0qs3n"]
+particle_flag_disable_z = true
+direction = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+spread = 180.0
+initial_velocity_min = 300.0
+initial_velocity_max = 500.0
+gravity = Vector3(0, 98, 0)
+radial_accel_min = -200.0
+radial_accel_max = -150.0
+scale_min = 0.05
+scale_max = 0.1
+color_ramp = SubResource("GradientTexture1D_k3cbv")
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.0
+
+[node name="APC_Bullet" type="Area2D" groups=["projectiles"]]
+scale = Vector2(0.9, 0.9)
+collision_layer = 32
+collision_mask = 9
+script = ExtResource("1_4cmln")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-3.33333, 0)
+scale = Vector2(0.206897, 0.206897)
+texture = ExtResource("1_vatti")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4.44444, 5.02161e-13)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_pjd6c")
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="SelfDestructionTimer" type="Timer" parent="Timers"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_0qs3n")
+texture = ExtResource("3_as2sj")
+lifetime = 0.1
+one_shot = true
+explosiveness = 1.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timers/SelfDestructionTimer" to="." method="_on_self_destruction_timer_timeout"]

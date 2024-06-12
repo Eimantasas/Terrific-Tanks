@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://cbi43yy0ujcla"]
+
+[ext_resource type="Texture2D" uid="uid://crap32wobmije" path="res://Assets/Enemies/1x/Asset 35.png" id="1_t7b5q"]
+[ext_resource type="AnimationLibrary" uid="uid://thhtd7686t5h" path="res://Resources/Animations/baller.res" id="2_1y4p7"]
+[ext_resource type="Script" path="res://Scenes/Enemies/bomb_head.gd" id="2_e2jss"]
+
+[sub_resource type="Animation" id="Animation_quqot"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-6.28319]
+}
+
+[sub_resource type="Animation" id="Animation_kq5qf"]
+resource_name = "spinning"
+length = 1.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.8),
+"transitions": PackedFloat32Array(3.4822, 3.03143),
+"update": 0,
+"values": [-6.28319, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i8avr"]
+_data = {
+"RESET": SubResource("Animation_quqot"),
+"spinning": SubResource("Animation_kq5qf")
+}
+
+[node name="BombHead" type="Sprite2D"]
+rotation = -6.28319
+texture = ExtResource("1_t7b5q")
+script = ExtResource("2_e2jss")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_i8avr"),
+"baller": ExtResource("2_1y4p7")
+}

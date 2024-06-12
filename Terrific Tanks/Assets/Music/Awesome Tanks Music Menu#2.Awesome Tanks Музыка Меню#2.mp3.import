@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dsj81pp82me3n"
+path="res://.godot/imported/Awesome Tanks Music Menu#2.Awesome Tanks Музыка Меню#2.mp3-40ee335283d862079f1279034c9d5fb2.mp3str"
+
+[deps]
+
+source_file="res://Assets/Music/Awesome Tanks Music Menu#2.Awesome Tanks Музыка Меню#2.mp3"
+dest_files=["res://.godot/imported/Awesome Tanks Music Menu#2.Awesome Tanks Музыка Меню#2.mp3-40ee335283d862079f1279034c9d5fb2.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.1
+bpm=0.0
+beat_count=0
+bar_beats=4

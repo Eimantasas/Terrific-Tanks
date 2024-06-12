@@ -1,0 +1,155 @@
+[gd_scene load_steps=17 format=3 uid="uid://v43e748or6sq"]
+
+[ext_resource type="Texture2D" uid="uid://gdfb275xfmk7" path="res://Assets/Enemies/1x/Asset 13.png" id="1_8k5la"]
+[ext_resource type="Script" path="res://Scenes/Enemies/enemy_1.gd" id="1_hhfsx"]
+[ext_resource type="PackedScene" uid="uid://bqbgcim53oouc" path="res://Scenes/Enemies/enemy_turret.tscn" id="2_ewqo6"]
+[ext_resource type="Animation" uid="uid://o33s3ytx6nou" path="res://Resources/Animations/explode.res" id="4_3su6w"]
+[ext_resource type="Texture2D" uid="uid://w50k8aafqb7" path="res://Assets/effects/1x/Asset 12.png" id="4_retkv"]
+[ext_resource type="AnimationLibrary" uid="uid://d1yekj1xkedkw" path="res://Resources/Animations/globalanims.res" id="5_lf8ei"]
+[ext_resource type="AudioStream" uid="uid://dougqiubkcdhu" path="res://Assets/SFX/tankshot.mp3" id="7_kvvn0"]
+[ext_resource type="AudioStream" uid="uid://dh2dwqppclcs7" path="res://Assets/SFX/Explosion Sound_01.mp3" id="8_ybmrl"]
+[ext_resource type="AudioStream" uid="uid://cnv2hsy4o7kco" path="res://Assets/SFX/damage impact_01.mp3" id="9_sjm2o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pl0cu"]
+size = Vector2(107.5, 120)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_63n0w"]
+radius = 863.764
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y17v7"]
+radius = 232.621
+
+[sub_resource type="Animation" id="Animation_jvrux"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Explosion:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_wjy5j"]
+resource_name = "going"
+length = 0.2
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_aad5p"]
+_data = {
+"RESET": SubResource("Animation_jvrux"),
+"explode": ExtResource("4_3su6w"),
+"going": SubResource("Animation_wjy5j")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y45ub"]
+size = Vector2(102.5, 122.5)
+
+[node name="EnemyTank" type="CharacterBody2D"]
+scale = Vector2(0.8, 0.8)
+collision_layer = 2
+collision_mask = 43
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_hhfsx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_8k5la")
+offset = Vector2(-10, 2.08165e-12)
+vframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-11.25, 0)
+shape = SubResource("RectangleShape2D_pl0cu")
+
+[node name="Turret" parent="." instance=ExtResource("2_ewqo6")]
+
+[node name="VisionRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VisionRange"]
+shape = SubResource("CircleShape2D_63n0w")
+
+[node name="StoppingRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StoppingRange"]
+shape = SubResource("CircleShape2D_y17v7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_aad5p"),
+"globalanims": ExtResource("5_lf8ei")
+}
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="MovementTimer" type="Timer" parent="Timers"]
+wait_time = 0.5
+autostart = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="Explosion" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("4_retkv")
+hframes = 3
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="ExplosionSFX" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("8_ybmrl")
+volume_db = -20.0
+
+[node name="TankShot" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("7_kvvn0")
+volume_db = -25.0
+
+[node name="TankHit" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("9_sjm2o")
+volume_db = -35.0
+pitch_scale = 0.9
+
+[node name="HurtBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(-13.75, 0)
+shape = SubResource("RectangleShape2D_y45ub")
+
+[connection signal="player_lost" from="." to="Turret" method="_on_enemy_1_player_lost"]
+[connection signal="player_seen" from="." to="Turret" method="_on_enemy_1_player_seen"]
+[connection signal="shot_fired" from="Turret" to="." method="_on_enemy_turret_shot_fired"]
+[connection signal="body_entered" from="VisionRange" to="." method="_on_vision_range_body_entered"]
+[connection signal="body_exited" from="VisionRange" to="." method="_on_vision_range_body_exited"]
+[connection signal="body_entered" from="StoppingRange" to="." method="_on_stopping_range_body_entered"]
+[connection signal="body_exited" from="StoppingRange" to="." method="_on_stopping_range_body_exited"]
+[connection signal="timeout" from="Timers/MovementTimer" to="." method="_on_movement_timer_timeout"]
+[connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]

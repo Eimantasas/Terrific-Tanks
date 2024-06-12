@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://kc3bmt7eh3ee"]
+
+[ext_resource type="Script" path="res://Scenes/Items/fix_kit.gd" id="1_3sqk7"]
+[ext_resource type="Texture2D" uid="uid://c1mwveqsl6vvn" path="res://Assets/Items/1x/Asset 33.png" id="1_4m56m"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0ru7s"]
+radius = 29.0
+
+[node name="FixKit" type="Area2D"]
+collision_layer = 4
+script = ExtResource("1_3sqk7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.465517, 0.465517)
+texture = ExtResource("1_4m56m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_0ru7s")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

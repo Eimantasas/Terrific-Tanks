@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=3 uid="uid://dkuwlh2p3up8b"]
+
+[ext_resource type="Script" path="res://Scenes/Projectiles/enemy_tank_bullet.gd" id="1_c3ywy"]
+[ext_resource type="Texture2D" uid="uid://vq6xbumafvb5" path="res://Assets/Projectiles/1x/Asset 15.png" id="1_vuhhw"]
+[ext_resource type="Texture2D" uid="uid://bw8ehlw7j2sva" path="res://Assets/effects/1x/Asset 22.png" id="2_uuryh"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xnpkw"]
+radius = 8.0
+height = 42.0
+
+[sub_resource type="Gradient" id="Gradient_1enyp"]
+offsets = PackedFloat32Array(0, 0.553279, 0.594262, 0.995902)
+colors = PackedColorArray(0.86, 0.616333, 0, 1, 0.45, 0.45, 0.45, 1, 0.51, 0.51, 0.51, 1, 0.509804, 0.509804, 0.509804, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_yieq0"]
+gradient = SubResource("Gradient_1enyp")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o8l60"]
+particle_flag_disable_z = true
+direction = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+spread = 180.0
+initial_velocity_min = 300.0
+initial_velocity_max = 500.0
+gravity = Vector3(0, 98, 0)
+radial_accel_min = -200.0
+radial_accel_max = -150.0
+scale_min = 0.05
+scale_max = 0.3
+color_ramp = SubResource("GradientTexture1D_yieq0")
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.0
+
+[node name="EnemyTankBullet" type="Area2D"]
+collision_layer = 32
+collision_mask = 9
+script = ExtResource("1_c3ywy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.933333, 0, 1)
+scale = Vector2(0.842105, 0.842105)
+texture = ExtResource("1_vuhhw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(15, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_xnpkw")
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="SelfDestructionTimer" type="Timer" parent="Timers"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 64
+process_material = SubResource("ParticleProcessMaterial_o8l60")
+texture = ExtResource("2_uuryh")
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timers/SelfDestructionTimer" to="." method="_on_self_destruction_timer_timeout"]

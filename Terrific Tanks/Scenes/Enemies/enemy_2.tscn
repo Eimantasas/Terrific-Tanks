@@ -1,0 +1,98 @@
+[gd_scene load_steps=13 format=3 uid="uid://vupige4if0nw"]
+
+[ext_resource type="Script" path="res://Scenes/Enemies/enemy_2.gd" id="1_kf3vf"]
+[ext_resource type="Texture2D" uid="uid://qi8u7c3s62k3" path="res://Assets/Enemies/1x/Asset 25.png" id="1_ryqsd"]
+[ext_resource type="Texture2D" uid="uid://w50k8aafqb7" path="res://Assets/effects/1x/Asset 12.png" id="2_042t1"]
+[ext_resource type="AnimationLibrary" uid="uid://d1yekj1xkedkw" path="res://Resources/Animations/globalanims.res" id="3_pf3bv"]
+[ext_resource type="PackedScene" uid="uid://bsji73vn7bkud" path="res://Scenes/Enemies/enemy_2_turret.tscn" id="5_aitgc"]
+[ext_resource type="AudioStream" uid="uid://h4nibudg3jtq" path="res://Assets/SFX/shot-rifle.mp3" id="6_qljtv"]
+[ext_resource type="AudioStream" uid="uid://cnv2hsy4o7kco" path="res://Assets/SFX/damage impact_01.mp3" id="7_spys0"]
+[ext_resource type="AudioStream" uid="uid://dh2dwqppclcs7" path="res://Assets/SFX/Explosion Sound_01.mp3" id="8_ubs6a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ljae"]
+size = Vector2(119, 76)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d2ltj"]
+radius = 716.017
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wqeqq"]
+radius = 232.621
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1sv5t"]
+size = Vector2(133, 82)
+
+[node name="EnemyAPC" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 11
+script = ExtResource("1_kf3vf")
+health = null
+speed = null
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ryqsd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-4.5, 0)
+shape = SubResource("RectangleShape2D_6ljae")
+
+[node name="VisionRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VisionRange"]
+shape = SubResource("CircleShape2D_d2ltj")
+
+[node name="StoppingRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StoppingRange"]
+shape = SubResource("CircleShape2D_wqeqq")
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="MovementTimer" type="Timer" parent="Timers"]
+wait_time = 0.5
+autostart = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="Turret" parent="." instance=ExtResource("5_aitgc")]
+
+[node name="Explosion" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("2_042t1")
+hframes = 3
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"globalanims": ExtResource("3_pf3bv")
+}
+
+[node name="Node" type="Node" parent="."]
+
+[node name="ApcShot" type="AudioStreamPlayer" parent="Node"]
+stream = ExtResource("6_qljtv")
+volume_db = -35.0
+
+[node name="TankHit" type="AudioStreamPlayer" parent="Node"]
+stream = ExtResource("7_spys0")
+volume_db = -35.0
+pitch_scale = 0.9
+
+[node name="ExplosionSFX" type="AudioStreamPlayer" parent="Node"]
+stream = ExtResource("8_ubs6a")
+volume_db = -20.0
+
+[node name="HurtBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(-4.5, 0)
+shape = SubResource("RectangleShape2D_1sv5t")
+
+[connection signal="body_entered" from="VisionRange" to="." method="_on_vision_range_body_entered"]
+[connection signal="body_entered" from="VisionRange" to="Turret" method="_on_vision_range_body_entered"]
+[connection signal="body_exited" from="VisionRange" to="." method="_on_vision_range_body_exited"]
+[connection signal="body_exited" from="VisionRange" to="Turret" method="_on_vision_range_body_exited"]
+[connection signal="body_entered" from="StoppingRange" to="." method="_on_stopping_range_body_entered"]
+[connection signal="body_exited" from="StoppingRange" to="." method="_on_stopping_range_body_exited"]
+[connection signal="timeout" from="Timers/MovementTimer" to="." method="_on_movement_timer_timeout"]
+[connection signal="shot_fired" from="Turret" to="." method="_on_turret_shot_fired"]

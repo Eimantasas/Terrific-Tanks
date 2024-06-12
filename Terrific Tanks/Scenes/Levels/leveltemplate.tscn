@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://yau78i12k1bu"]
+
+[ext_resource type="PackedScene" uid="uid://ftjah6pew8m2" path="res://Scenes/Player/player_tank.tscn" id="3_h5c3r"]
+[ext_resource type="PackedScene" uid="uid://biwfhob0a83xc" path="res://Scenes/UIScenes/ui.tscn" id="4_3ranm"]
+[ext_resource type="PackedScene" uid="uid://de2g1v0evnrev" path="res://Scenes/UIScenes/scene_transition_rect.tscn" id="5_wpb25"]
+
+[node name="Level" type="Node2D"]
+
+[node name="Map" type="Node2D" parent="."]
+
+[node name="Items" type="Node2D" parent="."]
+
+[node name="PlayerTank" parent="." instance=ExtResource("3_h5c3r")]
+position = Vector2(608, 377)
+
+[node name="Camera2D" type="Camera2D" parent="PlayerTank"]
+position = Vector2(2, 2)
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Projectiles" type="Node2D" parent="." groups=["projectiles"]]
+
+[node name="UI" parent="." instance=ExtResource("4_3ranm")]
+
+[node name="SceneTransitionRect" parent="." instance=ExtResource("5_wpb25")]

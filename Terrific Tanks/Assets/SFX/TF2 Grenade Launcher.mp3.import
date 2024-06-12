@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b7tdsnk22rv10"
+path="res://.godot/imported/TF2 Grenade Launcher.mp3-03ebf5beaf5dac5563049e9f746fd469.mp3str"
+
+[deps]
+
+source_file="res://Assets/SFX/TF2 Grenade Launcher.mp3"
+dest_files=["res://.godot/imported/TF2 Grenade Launcher.mp3-03ebf5beaf5dac5563049e9f746fd469.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

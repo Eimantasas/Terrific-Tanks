@@ -1,0 +1,220 @@
+[gd_scene load_steps=20 format=3 uid="uid://hvm21dqu0yoh"]
+
+[ext_resource type="Script" path="res://Scenes/UIScenes/level_menu.gd" id="1_niuw7"]
+[ext_resource type="FontFile" uid="uid://dp53b7v26dkyp" path="res://Assets/Fonts/gomarice_no_continue.ttf" id="2_7wfvs"]
+[ext_resource type="Texture2D" uid="uid://oeuy8ue6c8rg" path="res://Assets/UI/Art/1x/Asset 32.png" id="2_ekw4l"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nm540"]
+bg_color = Color(0.494118, 0.286275, 0.113725, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_adtui"]
+bg_color = Color(0.529412, 0.27451, 0.054902, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qxq5n"]
+bg_color = Color(0.4, 0.231373, 0.0901961, 1)
+
+[sub_resource type="Theme" id="Theme_lkxta"]
+default_font = ExtResource("2_7wfvs")
+default_font_size = 150
+Button/colors/font_color = Color(1, 0.45098, 0, 1)
+Button/colors/font_focus_color = Color(0.933333, 0.482353, 0.188235, 1)
+Button/colors/font_hover_color = Color(1, 0.415686, 0, 1)
+Button/colors/font_pressed_color = Color(0.811765, 0.458824, 0, 1)
+Button/styles/hover = SubResource("StyleBoxFlat_nm540")
+Button/styles/normal = SubResource("StyleBoxFlat_adtui")
+Button/styles/pressed = SubResource("StyleBoxFlat_qxq5n")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kkl5i"]
+bg_color = Color(0.329412, 0.329412, 0.329412, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dggkx"]
+bg_color = Color(0.329412, 0.329412, 0.329412, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rooee"]
+bg_color = Color(0.290196, 0.290196, 0.290196, 1)
+
+[sub_resource type="Theme" id="Theme_ybd12"]
+default_font_size = 150
+Button/colors/font_color = Color(0.658824, 0.658824, 0.658824, 1)
+Button/colors/font_focus_color = Color(0.658824, 0.658824, 0.658824, 1)
+Button/colors/font_hover_color = Color(0.741176, 0.741176, 0.741176, 1)
+Button/colors/font_pressed_color = Color(0.6, 0.6, 0.6, 1)
+Button/fonts/font = ExtResource("2_7wfvs")
+Button/styles/hover = SubResource("StyleBoxFlat_kkl5i")
+Button/styles/normal = SubResource("StyleBoxFlat_dggkx")
+Button/styles/pressed = SubResource("StyleBoxFlat_rooee")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c602f"]
+bg_color = Color(0.670588, 0.568627, 0.180392, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4e82h"]
+bg_color = Color(0.690196, 0.564706, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6p2le"]
+bg_color = Color(0.580392, 0.494118, 0.156863, 1)
+
+[sub_resource type="Theme" id="Theme_eennm"]
+default_font = ExtResource("2_7wfvs")
+default_font_size = 150
+Button/colors/font_color = Color(1, 0.905882, 0.2, 1)
+Button/colors/font_focus_color = Color(0.984314, 0.909804, 0.356863, 1)
+Button/colors/font_hover_color = Color(0.94902, 0.94902, 0.192157, 1)
+Button/colors/font_pressed_color = Color(0.984314, 0.909804, 0.356863, 1)
+Button/styles/hover = SubResource("StyleBoxFlat_c602f")
+Button/styles/normal = SubResource("StyleBoxFlat_4e82h")
+Button/styles/pressed = SubResource("StyleBoxFlat_6p2le")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ytvak"]
+bg_color = Color(0, 0.419608, 0.321569, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_blagi"]
+bg_color = Color(0.490196, 0.443137, 0.129412, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_df4or"]
+bg_color = Color(0, 0.419608, 0.321569, 1)
+
+[sub_resource type="Theme" id="Theme_th6xj"]
+default_font = ExtResource("2_7wfvs")
+default_font_size = 40
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_color = Color(1, 1, 0.482353, 1)
+Button/colors/font_pressed_color = Color(1, 1, 0.329412, 1)
+Button/styles/hover = SubResource("StyleBoxFlat_ytvak")
+Button/styles/normal = SubResource("StyleBoxFlat_blagi")
+Button/styles/pressed = SubResource("StyleBoxFlat_df4or")
+
+[node name="LevelMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_niuw7")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -8.0
+offset_top = -10.0
+offset_right = 1303.0
+offset_bottom = 743.0
+texture = ExtResource("2_ekw4l")
+
+[node name="M" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_top = 60
+theme_override_constants/margin_right = 60
+theme_override_constants/margin_bottom = 60
+
+[node name="VB" type="VBoxContainer" parent="M"]
+layout_mode = 2
+theme_override_constants/separation = 69
+
+[node name="HB1" type="HBoxContainer" parent="M/VB"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 250
+
+[node name="level1" type="Button" parent="M/VB/HB1"]
+custom_minimum_size = Vector2(175, 2.08165e-12)
+layout_mode = 2
+theme = SubResource("Theme_lkxta")
+text = "1"
+
+[node name="level2" type="Button" parent="M/VB/HB1"]
+custom_minimum_size = Vector2(175, 2.08165e-12)
+layout_mode = 2
+theme = SubResource("Theme_lkxta")
+text = "2
+"
+
+[node name="level3" type="Button" parent="M/VB/HB1"]
+custom_minimum_size = Vector2(175, 2.08165e-12)
+layout_mode = 2
+theme = SubResource("Theme_lkxta")
+text = "3
+"
+
+[node name="HB2" type="HBoxContainer" parent="M/VB"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 250
+
+[node name="level4" type="Button" parent="M/VB/HB2"]
+custom_minimum_size = Vector2(175, 2.08165e-12)
+layout_mode = 2
+theme = SubResource("Theme_ybd12")
+text = "4
+"
+
+[node name="level5" type="Button" parent="M/VB/HB2"]
+custom_minimum_size = Vector2(175, 2.08165e-12)
+layout_mode = 2
+theme = SubResource("Theme_ybd12")
+text = "5
+"
+
+[node name="level6" type="Button" parent="M/VB/HB2"]
+custom_minimum_size = Vector2(175, 2.08165e-12)
+layout_mode = 2
+theme = SubResource("Theme_ybd12")
+text = "6
+"
+
+[node name="HB3" type="HBoxContainer" parent="M/VB"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 250
+
+[node name="level7" type="Button" parent="M/VB/HB3"]
+custom_minimum_size = Vector2(175, 2.08165e-12)
+layout_mode = 2
+theme = SubResource("Theme_eennm")
+disabled = true
+text = "7"
+
+[node name="level8" type="Button" parent="M/VB/HB3"]
+custom_minimum_size = Vector2(175, 2.08165e-12)
+layout_mode = 2
+theme = SubResource("Theme_eennm")
+disabled = true
+text = "8"
+
+[node name="level9" type="Button" parent="M/VB/HB3"]
+custom_minimum_size = Vector2(175, 2.08165e-12)
+layout_mode = 2
+theme = SubResource("Theme_eennm")
+disabled = true
+text = "9"
+
+[node name="Back" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -66.0
+offset_top = -41.0
+offset_right = 66.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_th6xj")
+text = "Back"
+
+[connection signal="button_up" from="M/VB/HB1/level1" to="." method="_on_level_1_button_up"]
+[connection signal="button_up" from="M/VB/HB1/level2" to="." method="_on_level_2_button_up"]
+[connection signal="button_up" from="M/VB/HB1/level3" to="." method="_on_level_3_button_up"]
+[connection signal="button_up" from="M/VB/HB2/level4" to="." method="_on_level_4_button_up"]
+[connection signal="button_up" from="M/VB/HB2/level5" to="." method="_on_level_5_button_up"]
+[connection signal="button_up" from="M/VB/HB2/level6" to="." method="_on_level_6_button_up"]
+[connection signal="button_up" from="Back" to="." method="_on_back_button_up"]

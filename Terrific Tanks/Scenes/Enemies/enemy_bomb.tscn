@@ -1,0 +1,214 @@
+[gd_scene load_steps=18 format=3 uid="uid://dmfxxj1yshdmw"]
+
+[ext_resource type="Script" path="res://Scenes/Enemies/enemy_bomb.gd" id="1_6j1j4"]
+[ext_resource type="Texture2D" uid="uid://f65srcnnjfhp" path="res://Assets/Enemies/1x/Asset 36.png" id="2_ubckn"]
+[ext_resource type="Texture2D" uid="uid://w50k8aafqb7" path="res://Assets/effects/1x/Asset 12.png" id="4_5ehtx"]
+[ext_resource type="Script" path="res://Scenes/Enemies/BombHitbox.gd" id="5_fn2sv"]
+[ext_resource type="Animation" uid="uid://dhwcatmqpatle" path="res://Resources/Animations/spinningexplode.res" id="5_nq0lp"]
+[ext_resource type="AudioStream" uid="uid://cnv2hsy4o7kco" path="res://Assets/SFX/damage impact_01.mp3" id="6_rdtjh"]
+[ext_resource type="AnimationLibrary" uid="uid://thhtd7686t5h" path="res://Resources/Animations/baller.res" id="6_spf1y"]
+[ext_resource type="AudioStream" uid="uid://dh2dwqppclcs7" path="res://Assets/SFX/Explosion Sound_01.mp3" id="7_ya4y5"]
+[ext_resource type="PackedScene" uid="uid://cbi43yy0ujcla" path="res://Scenes/Enemies/bomb_head.tscn" id="10_35d53"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8aj6k"]
+size = Vector2(117, 82)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s5xqy"]
+radius = 589.014
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8l761"]
+radius = 99.0202
+
+[sub_resource type="Animation" id="Animation_x0e6p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Explosion:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_6fru4"]
+resource_name = "explode"
+length = 1.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Explosion:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Explosion:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0.701961, 0.701961, 1), Color(0.815686, 0.745098, 1, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("BombHead:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_bf3pk"]
+resource_name = "going"
+length = 0.2
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_aqq2w"]
+_data = {
+"RESET": SubResource("Animation_x0e6p"),
+"explode": SubResource("Animation_6fru4"),
+"going": SubResource("Animation_bf3pk"),
+"spinningexplode": ExtResource("5_nq0lp")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wq72y"]
+radius = 200.003
+
+[node name="EnemyBomb" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 43
+script = ExtResource("1_6j1j4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_ubckn")
+offset = Vector2(2.08165e-12, 2.08165e-12)
+vframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-5, 0)
+shape = SubResource("RectangleShape2D_8aj6k")
+
+[node name="VisionRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VisionRange"]
+shape = SubResource("CircleShape2D_s5xqy")
+
+[node name="StoppingRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StoppingRange"]
+shape = SubResource("CircleShape2D_8l761")
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="MovementTimer" type="Timer" parent="Timers"]
+wait_time = 0.5
+autostart = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="Explosion" type="Sprite2D" parent="."]
+modulate = Color(1, 0.701961, 0.701961, 1)
+scale = Vector2(1.35, 1.35)
+texture = ExtResource("4_5ehtx")
+hframes = 3
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_aqq2w"),
+"baller": ExtResource("6_spf1y")
+}
+
+[node name="BombHitbox" type="Area2D" parent="."]
+script = ExtResource("5_fn2sv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BombHitbox"]
+shape = SubResource("CircleShape2D_wq72y")
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="TankHit" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("6_rdtjh")
+volume_db = -35.0
+pitch_scale = 0.9
+
+[node name="ExplosionSFX" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("7_ya4y5")
+volume_db = -20.0
+
+[node name="BombHead" parent="." instance=ExtResource("10_35d53")]
+
+[connection signal="body_entered" from="VisionRange" to="." method="_on_vision_range_body_entered"]
+[connection signal="body_exited" from="VisionRange" to="." method="_on_vision_range_body_exited"]
+[connection signal="body_entered" from="StoppingRange" to="." method="_on_stopping_range_body_entered"]
+[connection signal="body_entered" from="StoppingRange" to="BombHead" method="_on_stopping_range_body_entered"]
+[connection signal="body_exited" from="StoppingRange" to="." method="_on_stopping_range_body_exited"]
+[connection signal="timeout" from="Timers/MovementTimer" to="." method="_on_movement_timer_timeout"]

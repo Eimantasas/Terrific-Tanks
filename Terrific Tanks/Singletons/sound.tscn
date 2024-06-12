@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=3 uid="uid://bayooh6dgafse"]
+
+[ext_resource type="Script" path="res://Singletons/sound.gd" id="1_ou1fo"]
+[ext_resource type="AudioStream" uid="uid://dsj81pp82me3n" path="res://Assets/Music/Awesome Tanks Music Menu#2.Awesome Tanks Музыка Меню#2.mp3" id="1_v03df"]
+[ext_resource type="AudioStream" uid="uid://r6xkhlyx878r" path="res://Assets/Music/Awesome Tanks Music Game#2. Awesome Tanks Музыка Игра#2.mp3" id="2_rwhh8"]
+[ext_resource type="AudioStream" uid="uid://dh2dwqppclcs7" path="res://Assets/SFX/Explosion Sound_01.mp3" id="3_yxsoq"]
+[ext_resource type="AudioStream" uid="uid://dougqiubkcdhu" path="res://Assets/SFX/tankshot.mp3" id="5_ce81h"]
+[ext_resource type="AudioStream" uid="uid://cnv2hsy4o7kco" path="res://Assets/SFX/damage impact_01.mp3" id="7_kuxkr"]
+[ext_resource type="AudioStream" uid="uid://6fafotu78asu" path="res://Assets/Music/Awesome Tanks Music Game#1.Awesome Tanks музыка Игра#1.mp3" id="8_tyxp4"]
+
+[node name="Sound" type="Node"]
+process_mode = 3
+script = ExtResource("1_ou1fo")
+
+[node name="MenuMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_v03df")
+volume_db = -5.0
+autoplay = true
+
+[node name="BattleMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_rwhh8")
+volume_db = -5.0
+
+[node name="ExplosionSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_yxsoq")
+volume_db = -10.0
+
+[node name="TankShot" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_ce81h")
+volume_db = -20.0
+
+[node name="HitSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_kuxkr")
+volume_db = -30.0
+pitch_scale = 0.9
+
+[node name="BattleMusic2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_tyxp4")
+volume_db = -5.0

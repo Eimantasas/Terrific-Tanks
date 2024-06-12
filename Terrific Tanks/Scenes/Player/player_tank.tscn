@@ -1,0 +1,163 @@
+[gd_scene load_steps=11 format=3 uid="uid://ftjah6pew8m2"]
+
+[ext_resource type="Script" path="res://Scenes/Player/player_tank.gd" id="1_ys01d"]
+[ext_resource type="Texture2D" uid="uid://63rix0kn375y" path="res://Assets/Player/1x/Asset 11.png" id="2_sipco"]
+[ext_resource type="PackedScene" uid="uid://cttbo4foavyyp" path="res://Scenes/Player/turret.tscn" id="3_4nvgg"]
+[ext_resource type="Texture2D" uid="uid://w50k8aafqb7" path="res://Assets/effects/1x/Asset 12.png" id="5_kauvg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nbs4l"]
+size = Vector2(84, 94)
+
+[sub_resource type="Animation" id="Animation_sphd7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Explosion:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Explosion:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_j265d"]
+resource_name = "explode"
+length = 1.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Explosion:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [2, 0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Explosion:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.65, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.65),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Turret:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.65),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_ouoqx"]
+resource_name = "going"
+length = 0.2
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rbtn5"]
+_data = {
+"RESET": SubResource("Animation_sphd7"),
+"explode": SubResource("Animation_j265d"),
+"going": SubResource("Animation_ouoqx")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4gjnn"]
+size = Vector2(86, 94)
+
+[node name="PlayerTank" type="CharacterBody2D" groups=["player"]]
+collision_mask = 62
+script = ExtResource("1_ys01d")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.775862, 0.775862)
+texture = ExtResource("2_sipco")
+vframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 0)
+shape = SubResource("RectangleShape2D_nbs4l")
+
+[node name="Turret" parent="." instance=ExtResource("3_4nvgg")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rbtn5")
+}
+
+[node name="Explosion" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("5_kauvg")
+hframes = 3
+
+[node name="HurtBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(-2, 0)
+shape = SubResource("RectangleShape2D_4gjnn")
+
+[connection signal="fired" from="Turret" to="." method="_on_turret_fired"]
+[connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]

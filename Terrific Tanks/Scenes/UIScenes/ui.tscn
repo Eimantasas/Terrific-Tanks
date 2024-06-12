@@ -1,0 +1,278 @@
+[gd_scene load_steps=17 format=3 uid="uid://biwfhob0a83xc"]
+
+[ext_resource type="Script" path="res://Scenes/UIScenes/ui.gd" id="1_0dda4"]
+[ext_resource type="Texture2D" uid="uid://r7lvna08chkn" path="res://Assets/UI/1x/Asset 23.png" id="1_qxv1j"]
+[ext_resource type="FontFile" uid="uid://dp53b7v26dkyp" path="res://Assets/Fonts/gomarice_no_continue.ttf" id="3_mah2n"]
+[ext_resource type="Texture2D" uid="uid://bgslrf46xgr0j" path="res://Assets/UI/1x/Asset 28.png" id="4_k06uc"]
+[ext_resource type="Script" path="res://Scenes/UIScenes/Arrow.gd" id="5_n6d6x"]
+[ext_resource type="Texture2D" uid="uid://5mju4invb7qc" path="res://Assets/Icons/1x/Asset 39.png" id="6_tg34o"]
+[ext_resource type="Texture2D" uid="uid://b252mhahk60jt" path="res://Assets/Icons/1x/Asset 37.png" id="7_vyasq"]
+[ext_resource type="Texture2D" uid="uid://dekf653uw8sqk" path="res://Assets/Icons/1x/Asset 38.png" id="8_n0d8u"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_mulp5"]
+font = ExtResource("3_mah2n")
+font_size = 40
+font_color = Color(0.0705882, 0.541176, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_luyml"]
+bg_color = Color(0.160784, 0.4, 0, 0.623529)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.054902, 0.301961, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="Theme" id="Theme_tpl2v"]
+Panel/styles/panel = SubResource("StyleBoxFlat_luyml")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yq1mt"]
+bg_color = Color(0.627451, 0.568627, 0.227451, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fiq0v"]
+bg_color = Color(0.490196, 0.443137, 0.129412, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bbfhu"]
+bg_color = Color(0.482353, 0.443137, 0.188235, 1)
+
+[sub_resource type="Theme" id="Theme_v2txa"]
+default_font = ExtResource("3_mah2n")
+default_font_size = 35
+Button/colors/font_color = Color(1, 1, 0, 1)
+Button/colors/font_hover_color = Color(1, 1, 0.482353, 1)
+Button/colors/font_pressed_color = Color(1, 1, 0.329412, 1)
+Button/styles/hover = SubResource("StyleBoxFlat_yq1mt")
+Button/styles/normal = SubResource("StyleBoxFlat_fiq0v")
+Button/styles/pressed = SubResource("StyleBoxFlat_bbfhu")
+
+[sub_resource type="LabelSettings" id="LabelSettings_iesp8"]
+font = ExtResource("3_mah2n")
+font_size = 60
+font_color = Color(1, 1, 0, 1)
+outline_size = 30
+outline_color = Color(0.411765, 0.529412, 0, 1)
+
+[node name="UI" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_0dda4")
+
+[node name="Interface" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Interface"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="PlayerHpBar" type="TextureProgressBar" parent="Interface/MarginContainer" groups=["playerhpbar"]]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+value = 100.0
+nine_patch_stretch = true
+texture_under = ExtResource("1_qxv1j")
+texture_progress = ExtResource("1_qxv1j")
+tint_under = Color(0.478431, 0, 0, 1)
+tint_progress = Color(0.85098, 1, 0, 1)
+
+[node name="Label" type="Label" parent="Interface/MarginContainer/PlayerHpBar"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Armor"
+label_settings = SubResource("LabelSettings_mulp5")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Arrow" type="Sprite2D" parent="Interface/MarginContainer"]
+visible = false
+position = Vector2(630, 102)
+texture = ExtResource("4_k06uc")
+script = ExtResource("5_n6d6x")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Interface/MarginContainer"]
+custom_minimum_size = Vector2(500, 400)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="EndPanel" type="Panel" parent="Interface/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(500, 2.08165e-12)
+layout_mode = 2
+theme = SubResource("Theme_tpl2v")
+
+[node name="Back" type="Button" parent="Interface/MarginContainer/HBoxContainer/EndPanel"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 72.0
+offset_top = -165.0
+offset_right = 427.0
+offset_bottom = -104.0
+grow_vertical = 0
+theme = SubResource("Theme_v2txa")
+text = "Back to level menu"
+
+[node name="Restart" type="Button" parent="Interface/MarginContainer/HBoxContainer/EndPanel"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 171.0
+offset_top = -93.0
+offset_right = 328.0
+offset_bottom = -32.0
+grow_vertical = 0
+theme = SubResource("Theme_v2txa")
+text = "Restart"
+
+[node name="Label" type="Label" parent="Interface/MarginContainer/HBoxContainer/EndPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -186.0
+offset_top = 30.0
+offset_right = 186.0
+offset_bottom = 209.0
+grow_horizontal = 2
+size_flags_vertical = 8
+text = "Next time, try
+not to explode"
+label_settings = SubResource("LabelSettings_iesp8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EnemyCount" type="Label" parent="Interface/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "5 Enemies"
+label_settings = SubResource("LabelSettings_iesp8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InfoPanel" type="Panel" parent="Interface/MarginContainer"]
+custom_minimum_size = Vector2(900, 500)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = SubResource("Theme_tpl2v")
+
+[node name="OK" type="Button" parent="Interface/MarginContainer/InfoPanel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -62.0
+offset_top = -100.0
+offset_right = 62.0
+offset_bottom = -39.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_v2txa")
+text = "OK"
+
+[node name="Label" type="Label" parent="Interface/MarginContainer/InfoPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -386.0
+offset_top = 35.0
+offset_right = 209.0
+offset_bottom = 352.0
+grow_horizontal = 2
+size_flags_vertical = 8
+text = "Green APCs: They shoot
+and move fast, but
+lack durability. Only
+a problem if there are
+many of them."
+label_settings = SubResource("LabelSettings_iesp8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="APCTexture" type="TextureRect" parent="Interface/MarginContainer/InfoPanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -107.0
+offset_right = 182.0
+offset_bottom = 21.0
+grow_horizontal = 0
+grow_vertical = 2
+rotation = 2.02633
+texture = ExtResource("6_tg34o")
+
+[node name="TankTexture" type="TextureRect" parent="Interface/MarginContainer/InfoPanel"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -238.0
+offset_top = 170.0
+offset_right = -24.0
+offset_bottom = 364.0
+grow_horizontal = 0
+grow_vertical = 2
+rotation = -1.23918
+texture = ExtResource("7_vyasq")
+stretch_mode = 4
+
+[node name="BombTexture" type="TextureRect" parent="Interface/MarginContainer/InfoPanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -33.0
+offset_top = -4.0
+offset_right = 181.0
+offset_bottom = 160.0
+grow_horizontal = 0
+grow_vertical = 2
+rotation = 1.82387
+texture = ExtResource("8_n0d8u")
+stretch_mode = 4
+
+[connection signal="button_up" from="Interface/MarginContainer/HBoxContainer/EndPanel/Back" to="." method="_on_back_button_up"]
+[connection signal="button_up" from="Interface/MarginContainer/HBoxContainer/EndPanel/Restart" to="." method="_on_restart_button_up"]
+[connection signal="button_up" from="Interface/MarginContainer/InfoPanel/OK" to="." method="_on_ok_button_up"]

@@ -1,0 +1,106 @@
+[gd_scene load_steps=11 format=3 uid="uid://cttbo4foavyyp"]
+
+[ext_resource type="Script" path="res://Scenes/Player/turret.gd" id="1_6ib8f"]
+[ext_resource type="Texture2D" uid="uid://bfj3jkh6igg4b" path="res://Assets/Player/1x/Asset 8.png" id="2_1y6mv"]
+[ext_resource type="Texture2D" uid="uid://dnie7eygvaryh" path="res://Assets/effects/1x/Asset 9.png" id="3_mgix3"]
+
+[sub_resource type="Animation" id="Animation_ruhv3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_f68b5"]
+resource_name = "fire"
+length = 0.5
+step = 0.04
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.04, 0.08, 0.12, 0.16, 0.2, 0.24),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8ekwf"]
+_data = {
+"RESET": SubResource("Animation_ruhv3"),
+"fire": SubResource("Animation_f68b5")
+}
+
+[sub_resource type="Gradient" id="Gradient_qvm7g"]
+colors = PackedColorArray(0.56, 0.56, 0.56, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_hmsxn"]
+gradient = SubResource("Gradient_qvm7g")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mb0vv"]
+particle_flag_align_y = true
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 6.6
+spread = 60.0
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+gravity = Vector3(1, 2.08165e-12, 2.08165e-12)
+scale_min = 0.01
+scale_max = 0.15
+color = Color(1, 1, 1, 0.92549)
+color_ramp = SubResource("GradientTexture1D_hmsxn")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3kr1w"]
+size = Vector2(58, 64)
+
+[node name="PlayerTurret" type="Area2D"]
+script = ExtResource("1_6ib8f")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(4.64647, 0)
+scale = Vector2(0.767677, 0.767677)
+texture = ExtResource("2_1y6mv")
+offset = Vector2(2.08165e-12, 2.08165e-12)
+vframes = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_8ekwf")
+}
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(68, -3)
+emitting = false
+amount = 40
+process_material = SubResource("ParticleProcessMaterial_mb0vv")
+texture = ExtResource("3_mgix3")
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.5
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="ReloadTimer" type="Timer" parent="Timers"]
+wait_time = 1.5
+one_shot = true
+
+[node name="Bulletp" type="Marker2D" parent="." groups=["bulletpos"]]
+position = Vector2(79, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_3kr1w")
+
+[connection signal="timeout" from="Timers/ReloadTimer" to="." method="_on_reload_timer_timeout"]

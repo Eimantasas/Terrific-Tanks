@@ -1,0 +1,267 @@
+[gd_scene load_steps=18 format=3 uid="uid://dqqqpp4xeqevw"]
+
+[ext_resource type="Texture2D" uid="uid://dffs3dsnllxfb" path="res://Assets/UI/Art/1x/Asset 17.png" id="1_43vaj"]
+[ext_resource type="Script" path="res://Scenes/UIScenes/main_menu.gd" id="1_q4y23"]
+[ext_resource type="FontFile" uid="uid://dp53b7v26dkyp" path="res://Assets/Fonts/gomarice_no_continue.ttf" id="2_igfch"]
+[ext_resource type="Texture2D" uid="uid://c1mwveqsl6vvn" path="res://Assets/Items/1x/Asset 33.png" id="4_5k2ol"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5cwf0"]
+bg_color = Color(0.427451, 0.521569, 0.223529, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vox5p"]
+bg_color = Color(0.462745, 0.6, 0.192157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ns347"]
+bg_color = Color(0.490196, 0.596078, 0.258824, 1)
+
+[sub_resource type="Theme" id="Theme_nb6xx"]
+default_font = ExtResource("2_igfch")
+default_font_size = 60
+Button/colors/font_color = Color(0.776471, 0.929412, 0, 1)
+Button/colors/font_hover_color = Color(0.694118, 0.85098, 0, 1)
+Button/colors/font_pressed_color = Color(0.807843, 0.92549, 0.294118, 1)
+Button/styles/hover = SubResource("StyleBoxFlat_5cwf0")
+Button/styles/normal = SubResource("StyleBoxFlat_vox5p")
+Button/styles/pressed = SubResource("StyleBoxFlat_ns347")
+
+[sub_resource type="LabelSettings" id="LabelSettings_030r0"]
+font = ExtResource("2_igfch")
+font_size = 120
+font_color = Color(1, 1, 0, 1)
+outline_size = 50
+outline_color = Color(0.411765, 0.529412, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u1k8d"]
+bg_color = Color(0.160784, 0.4, 0, 0.623529)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.054902, 0.301961, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="Theme" id="Theme_8yr7d"]
+Panel/styles/panel = SubResource("StyleBoxFlat_u1k8d")
+
+[sub_resource type="LabelSettings" id="LabelSettings_byoyd"]
+font = ExtResource("2_igfch")
+font_size = 55
+font_color = Color(1, 1, 0, 1)
+outline_size = 30
+outline_color = Color(0.411765, 0.529412, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yek0d"]
+bg_color = Color(0, 0.419608, 0.321569, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7clkg"]
+bg_color = Color(0.490196, 0.443137, 0.129412, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ginbi"]
+bg_color = Color(0, 0.419608, 0.321569, 1)
+
+[sub_resource type="Theme" id="Theme_4gws4"]
+default_font = ExtResource("2_igfch")
+default_font_size = 40
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_color = Color(1, 1, 0.482353, 1)
+Button/colors/font_pressed_color = Color(1, 1, 0.329412, 1)
+Button/styles/hover = SubResource("StyleBoxFlat_yek0d")
+Button/styles/normal = SubResource("StyleBoxFlat_7clkg")
+Button/styles/pressed = SubResource("StyleBoxFlat_ginbi")
+
+[sub_resource type="LabelSettings" id="LabelSettings_wi2dl"]
+font = ExtResource("2_igfch")
+font_size = 30
+font_color = Color(1, 1, 0, 1)
+outline_size = 50
+outline_color = Color(0.411765, 0.529412, 0, 1)
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_q4y23")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_43vaj")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(500, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 35
+
+[node name="Play" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_nb6xx")
+text = "Play"
+
+[node name="HowTo" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_nb6xx")
+text = "How To"
+
+[node name="Options" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_nb6xx")
+text = "Options"
+
+[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_nb6xx")
+text = "Quit"
+
+[node name="Label" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Terrific Tanks"
+label_settings = SubResource("LabelSettings_030r0")
+
+[node name="HelpMenu" type="Panel" parent="MarginContainer"]
+visible = false
+custom_minimum_size = Vector2(750, 500)
+layout_mode = 2
+size_flags_vertical = 4
+theme = SubResource("Theme_8yr7d")
+
+[node name="Label" type="Label" parent="MarginContainer/HelpMenu"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -568.0
+offset_top = 26.0
+offset_right = 570.0
+offset_bottom = 475.0
+grow_horizontal = 2
+size_flags_vertical = 8
+text = "Kill all enemies, then find your way north
+of the map. Go on the yellow grass to win.
+It only appears after destroying all enemy
+vehicles. There are fixkits [     ] on some 
+levels. use them wisely. They heal you."
+label_settings = SubResource("LabelSettings_byoyd")
+horizontal_alignment = 1
+
+[node name="ok" type="Button" parent="MarginContainer/HelpMenu"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -119.0
+offset_top = -113.0
+offset_right = 119.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_4gws4")
+text = "OK"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HelpMenu"]
+layout_mode = 0
+offset_left = 804.0
+offset_top = 218.0
+offset_right = 866.0
+offset_bottom = 281.0
+texture = ExtResource("4_5k2ol")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Disclaimer" type="Panel" parent="MarginContainer"]
+custom_minimum_size = Vector2(750, 500)
+layout_mode = 2
+size_flags_vertical = 4
+theme = SubResource("Theme_8yr7d")
+
+[node name="Label" type="Label" parent="MarginContainer/Disclaimer"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -568.0
+offset_top = 27.0
+offset_right = 570.0
+offset_bottom = 408.0
+grow_horizontal = 2
+size_flags_vertical = 8
+text = "A little info:
+1. Only the first 6 levels are complete.
+2, Music composed by waterflame. Check 
+them out by clicking on the top right of the 
+screen. SFX were downloaded from the 
+internet."
+label_settings = SubResource("LabelSettings_byoyd")
+horizontal_alignment = 1
+
+[node name="ok" type="Button" parent="MarginContainer/Disclaimer"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -119.0
+offset_top = -113.0
+offset_right = 119.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_4gws4")
+text = "OK"
+
+[node name="DIsclaimer" type="Label" parent="."]
+layout_mode = 2
+offset_left = 1041.0
+offset_top = 24.0
+offset_right = 1250.0
+offset_bottom = 89.0
+size_flags_vertical = 8
+text = "Music composed
+by Waterflame"
+label_settings = SubResource("LabelSettings_wi2dl")
+
+[node name="LinkButton" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -251.0
+offset_top = 16.0
+offset_right = -18.0
+offset_bottom = 99.0
+grow_horizontal = 0
+
+[connection signal="button_up" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_button_up"]
+[connection signal="button_up" from="MarginContainer/VBoxContainer/HowTo" to="." method="_on_how_to_button_up"]
+[connection signal="button_up" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_button_up"]
+[connection signal="button_up" from="MarginContainer/HelpMenu/ok" to="." method="_on_back_button_up"]
+[connection signal="button_up" from="MarginContainer/Disclaimer/ok" to="." method="_on_ok_button_up"]
+[connection signal="button_up" from="LinkButton" to="." method="_on_link_button_button_up"]
